@@ -1,91 +1,87 @@
 {
-    "$schema": "https://www.krakend.io/schema/krakend.json",
-    "version": 3,
-    "name": "KrakenD - API Gateway",
-    "timeout": "4000ms",
-    "extra_config": {
-        "router": {
-            "auto_options": true,
-            "return_error_msg": true
-        },
-        "security/cors": {
-            "allow_methods": [
-                "GET",
-                "HEAD",
-                "PUT",
-                "POST",
-                "OPTIONS",
-                "PATCH",
-                "DELETE"
-            ],
-            "allow_headers": [
-                "Origin",
-                "Authorization",
-                "Content-Type",
-                "Cache-Control",
-                "Pragma",
-                "Accept-Language",
-                "Access-Control-Allow-Origin"
-            ],
-            "debug": true
-        }
+  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "version": 3,
+  "name": "KrakenD - API Gateway",
+  "timeout": "4000ms",
+  "extra_config": {
+    "router": {
+      "auto_options": true,
+      "return_error_msg": true
     },
-    "endpoints": [
+    "security/cors": {
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "PUT",
+        "POST",
+        "OPTIONS",
+        "PATCH",
+        "DELETE"
+      ],
+      "allow_headers": [
+        "Origin",
+        "Authorization",
+        "Content-Type",
+        "Cache-Control",
+        "Pragma",
+        "Accept-Language",
+        "Access-Control-Allow-Origin"
+      ],
+      "debug": true
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/v1/api/auth/login",
+      "method": "POST",
+      "backend": [
         {
-            "endpoint": "/v1/api/user/login",
-            "method": "POST",
-            "backend": [
-                {
-                    "url_pattern": "/v1/api/auth/login",
-                    "encoding": "json",
-                    "host": [
-                        "http://user-service"
-                    ],
-                    "extra_config": {
-                        "backend/http": {
-                            "return_error_code": true
-                        }
-                    }
-                }
-            ],
-            "input_headers": [
-                "Origin",
-                "Authorization",
-                "Content-Type",
-                "Cache-Control",
-                "Pragma",
-                "Accept-Language",
-                "Access-Control-Allow-Origin"
-            ]
-        },
-        {
-            "endpoint": "/v1/api/user/register",
-            "method": "POST",
-            "backend": [
-                {
-                    "url_pattern": "/v1/api/auth/register",
-                    "encoding": "json",
-                    "host": [
-                        "http://user-service"
-                    ],
-                    "extra_config": {
-                        "backend/http": {
-                            "return_error_code": true
-                        }
-                    }
-                }
-            ],
-            "input_headers": [
-                "Origin",
-                "Authorization",
-                "Content-Type",
-                "Cache-Control",
-                "Pragma",
-                "Accept-Language",
-                "Access-Control-Allow-Origin"
-            ]
+          "url_pattern": "/v1/api/auth/login",
+          "encoding": "json",
+          "host": ["http://user-service"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
         }
-    ],
-    "output_encoding": "no-op",
-    "debug_endpoint": true
+      ],
+      "input_headers": [
+        "Origin",
+        "Authorization",
+        "Content-Type",
+        "Cache-Control",
+        "Pragma",
+        "Accept-Language",
+        "Access-Control-Allow-Origin"
+      ]
+    },
+    {
+      "endpoint": "/v1/api/auth/register",
+      "method": "POST",
+      "backend": [
+        {
+          "url_pattern": "/v1/api/auth/register",
+          "encoding": "json",
+          "host": ["http://user-service"],
+          "extra_config": {
+            "backend/http": {
+              "return_error_code": true
+            }
+          }
+        }
+      ],
+      "input_headers": [
+        "Origin",
+        "Authorization",
+        "Content-Type",
+        "Cache-Control",
+        "Pragma",
+        "Accept-Language",
+        "Access-Control-Allow-Origin"
+      ]
+    }
+  ],
+  "output_encoding": "no-op",
+  "debug_endpoint": true
 }
